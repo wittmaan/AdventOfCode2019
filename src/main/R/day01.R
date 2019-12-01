@@ -16,17 +16,19 @@ sum(floor(input / 3) - 2)
 
 calc_fuel <- function(x) {
   f <- function(y) { floor(y / 3) - 2 }
-  fuels <- c(x)
+
+  act_val <- x
+  fuel_sum <- 0
   while (TRUE) {
-    act.val <- f(fuels[length(fuels)])
-    if (act.val < 0) {
+    act_val <- f(act_val)
+    if (act_val < 0) {
       break
     }
     
-    fuels <- c(fuels, act.val)
+    fuel_sum <- fuel_sum + act_val
   }
   
-  return(sum(fuels[-1]))
+  return(fuel_sum)
 }
 
 expect_equal(calc_fuel(100756), 50346)
