@@ -60,13 +60,6 @@ path <- function(x) {
 }
 
 
-p1 <- path("R8,U5,L5,D3")
-p2 <- path("U7,R6,D4,L4")
-
-plot(p1, xlim=c(min(p1$x, p2$x), max(p1$x, p2$x)), ylim=c(min(p1$y, p2$y), max(p1$y, p2$y)))
-points(p2, pch="+")
-
-
 calc_intersections <- function(p1, p2) {
   pp1 <- copy(p1)
   pp2 <- copy(p2)
@@ -93,6 +86,20 @@ expect_equal(calc_min_distance(path("R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51
 calc_min_distance(path(input[1]), path(input[2]))
 
 # 2427
+
+
+plot_wires <- function(p1, p2) {
+  intersections <- calc_intersections(p1, p2)[dist==min(dist)]
+  
+  plot(p1, xlim=c(min(p1$x, p2$x), max(p1$x, p2$x)), ylim=c(min(p1$y, p2$y), max(p1$y, p2$y)), col="blue")
+  points(p2, col="red")  
+  points(intersections[,.(x,y)], pch=5, cex=4, col="black", lwd=8)
+}
+
+plot_wires(path("R8,U5,L5,D3"), path("U7,R6,D4,L4"))
+plot_wires(path(input[1]), path(input[2]))
+
+
 
 
 ## --- Part two ---
