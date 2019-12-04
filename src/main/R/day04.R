@@ -54,6 +54,6 @@ expect_equal(check_password_part2(111122), TRUE)
 part2 <- sapply(134792:675810, check_password_part2)
 sum(part1 & part2)
 
-# 397203 too high
+# 1319
 
 
