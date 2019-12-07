@@ -65,4 +65,38 @@ print(total_orbits)
 
 # --- Part two ---
 
+sample_map_data = ['COM)B', 'B)C', 'C)D', 'D)E', 'E)F', 'B)G', 'G)H', 'D)I', 'E)J', 'J)K', 'K)L', 'K)YOU', 'I)SAN']
+tmp = fill_dict(sample_map_data)
 
+
+def get_path(data, obj):
+    path = []
+    for key, value in data.items():
+        if obj in value:
+            path.append(key)
+            sub_path = get_path(data, key)
+            [path.append(x) for x in sub_path]
+    return path
+
+
+def calc_orbital_transfers(data, source, target):
+    path_source = get_path(data, source)
+    path_target = get_path(data, target)
+    n_transfers = 0
+    intersection_found = False
+    for idx1, val1 in enumerate(path_source):
+        for idx2, val2 in enumerate(path_target):
+            if val1 == val2:
+                n_transfers += idx1
+                n_transfers += idx2
+                intersection_found = True
+                break
+        if intersection_found:
+            break
+    return n_transfers
+
+
+total_transfers = calc_orbital_transfers(fill_dict(map_data), 'YOU', 'SAN')
+print(total_transfers)
+
+# 301
