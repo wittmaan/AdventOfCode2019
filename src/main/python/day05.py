@@ -11,3 +11,8 @@ print(output)
 # 4601506
 
 # --- Part two ---
+
+_, output = intcode.process_opcode(program, 5)
+print(output)
+
+# 5525561
