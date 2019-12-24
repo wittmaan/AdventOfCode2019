@@ -50,7 +50,8 @@ def process_opcode(x, input_instruction):
             program[out] = program[in1] * program[in2]
             pos += 4
         elif opcode == Opcode.INPUT:
-            program[program[pos + 1]] = input_instruction
+            program[program[pos + 1]] = input_instruction[0]
+            input_instruction = input_instruction[1:]
             pos += 2
         elif opcode == Opcode.OUTPUT:
             out = program[program[pos + 1]] if modes[0] == Mode.POSITION else program[pos + 1]
@@ -79,7 +80,7 @@ def process_opcode(x, input_instruction):
         else:
             raise ValueError("unknown opcode: {}".format(opcode))
 
-    print("program={}, output={}".format(program, output))
+    #print("program={}, output={}".format(program, output))
     return program, output
 
 # assert process_opcode([1002, 4, 3, 4, 33, 99], 2) == ([1002, 4, 3, 4, 99, 99], [])
