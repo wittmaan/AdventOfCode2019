@@ -5,14 +5,14 @@ import intcode
 # --- Part one ---
 
 program = [int(x) for x in list(fileinput.input())[0].split(',')]
-_, output = intcode.process_opcode(program, 1)
+_, output = intcode.process_opcode(program, [1])
 print(output)
 
 # 4601506
 
 # --- Part two ---
 
-_, output = intcode.process_opcode(program, 5)
+_, output = intcode.process_opcode(program, [5])
 print(output)
 
 # 5525561
